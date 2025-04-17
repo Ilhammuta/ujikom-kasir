@@ -62,6 +62,7 @@
 <body onload="window.print()">
     <h2>FlexyLite</h2>
     <p>
+        Nama : {{ $invoice->member->nama ?? 'NON-MEMBER' }}<br>
         Member Status : {{ $invoice->status_member === 'member' ? 'Member' : 'NON-MEMBER' }}<br>
         No. HP : {{ $invoice->member->telp ?? '000' }}<br>
         @if ($invoice->status_member === 'member')

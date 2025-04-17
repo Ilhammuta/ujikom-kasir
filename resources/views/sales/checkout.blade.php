@@ -39,7 +39,7 @@
 
         <div class="mb-4">
             <label for="total_paid" class="block font-semibold">Total Bayar</label>
-            <input type="number" name="total_paid" id="total_paid" required class="border px-4 py-2 rounded w-full">
+            <input type="number" name="total_paid" id="total_paid" required class="border px-4 py-2 rounded w-full" >
         </div>
 
         <div class="mb-4">
@@ -58,4 +58,5 @@
         </button>
     </form>
 </div>
+
 @endsection

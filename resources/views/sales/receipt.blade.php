@@ -4,21 +4,23 @@
 
 @section('content')
 <div class="container mx-auto p-6">
-    <a href="{{ route('penjualan.index') }}" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded">Kembali</a>
+   
 
     <h1 class="text-xl font-bold mb-4">Struk Penjualan</h1>
 
-    <p><strong>ID Penjualan:</strong> {{ $penjualan->id }}</p>
-    <p><strong>Tanggal:</strong> {{ $penjualan->created_at->format('d-m-Y H:i') }}</p>
-    <p><strong>Kasir:</strong> {{ auth()->user()->name }}</p>
+    <div class="space-y-2 text-gray-800 text-sm">
+        <p><strong>ID Penjualan:</strong> {{ $penjualan->id }}</p>
+        <p><strong>Tanggal:</strong> {{ $penjualan->created_at->format('d-m-Y H:i') }}</p>
+        <p><strong>Kasir:</strong> {{ auth()->user()->name }}</p>
 
-    @if ($penjualan->member)
-        <p><strong>Member:</strong> {{ $penjualan->member->nama }} ({{ $penjualan->member->telp }})</p>
-    @endif
+        @if ($penjualan->member)
+            <p><strong>Member:</strong> {{ $penjualan->member->nama }} ({{ $penjualan->member->telp }})</p>
+        @endif
+    </div>
 
-    <table class="w-full my-4 border-collapse">
+    <table class="w-full my-4 border-collapse text-sm text-left">
         <thead>
-            <tr class="bg-gray-100">
+            <tr class="bg-gray-100 text-gray-700">
                 <th class="border px-2 py-1">Produk</th>
                 <th class="border px-2 py-1">Jumlah</th>
                 <th class="border px-2 py-1">Harga</th>
@@ -27,7 +29,7 @@
         </thead>
         <tbody>
             @foreach ($penjualan->detailPenjualans as $item)
-                <tr>
+                <tr class="hover:bg-gray-50">
                     <td class="border px-2 py-1">{{ $item->produk->produk }}</td>
                     <td class="border px-2 py-1">{{ $item->qty }}</td>
                     <td class="border px-2 py-1">Rp. {{ number_format($item->harga_satuan, 0, ',', '.') }}</td>
@@ -36,8 +38,8 @@
             @endforeach
         </tbody>
     </table>
-
-    <div class="text-right">
+    
+    <div class="text-right text-sm space-y-1 text-gray-800">
         <p><strong>Total:</strong> Rp. {{ number_format($penjualan->total_harga, 0, ',', '.') }}</p>
         <p><strong>Dibayar:</strong> Rp. {{ number_format($penjualan->total_bayar, 0, ',', '.') }}</p>
         <p><strong>Kembalian:</strong> Rp. {{ number_format($penjualan->kembalian, 0, ',', '.') }}</p>
@@ -50,4 +52,8 @@
         @endif
     </div>
 </div>
+<a href="{{ route('penjualan.index') }}" class="inline-block bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded mb-6e">
+    Kembali
+</a>
+
 @endsection
