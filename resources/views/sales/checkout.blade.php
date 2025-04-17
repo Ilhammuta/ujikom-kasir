@@ -48,9 +48,9 @@
             <label class="ml-4"><input type="radio" name="is_member" value="0"> Bukan</label>
         </div>
 
-        <div class="mb-4">
+        <div class="mb-4 " id="phone-container">
             <label for="number_telephone" class="block font-semibold">Nomor Telepon</label>
-            <input type="text" name="number_telephone" class="border px-4 py-2 rounded w-full">
+            <input type="text" name="number_telephone" id="number_telephone" class="border px-4 py-2 rounded w-full">
         </div>
 
         <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded">

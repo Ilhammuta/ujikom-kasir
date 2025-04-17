@@ -34,7 +34,7 @@
                     <!-- Harga -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Harga <span class="text-red-500">*</span></label>
-                        <input type="text" name="harga_display" id="harga" class="w-full p-2 border rounded" required>
+                        <input type="text" name="harga_display" id="harga" class="w-full p-2 border rounded" required  >
                         <input type="hidden" name="harga" id="harga_hidden">
                         @error('harga')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
