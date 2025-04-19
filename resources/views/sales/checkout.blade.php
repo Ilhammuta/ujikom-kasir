@@ -37,18 +37,28 @@
             <input type="hidden" name="total_price" value="{{ $totalPrice }}">
         </div>
 
+        {{-- Format Rp --}}
         <div class="mb-4">
-            <label for="total_paid" class="block font-semibold">Total Bayar</label>
-            <input type="number" name="total_paid" id="total_paid" required class="border px-4 py-2 rounded w-full" >
+            <label for="total_paid_display" class="block font-semibold">Total Bayar</label>
+            <input 
+                type="text" 
+                id="total_paid_display" 
+                class="border px-4 py-2 rounded w-full" 
+                placeholder="Rp. 0"
+                maxlength="20" 
+            >
+            <input type="hidden" name="total_paid" id="total_paid" required>
         </div>
-
+        
+        {{-- Pilihan Member --}}
         <div class="mb-4">
             <label class="block font-semibold">Apakah Member?</label>
-            <label><input type="radio" name="is_member" value="1" required> Ya</label>
-            <label class="ml-4"><input type="radio" name="is_member" value="0"> Bukan</label>
+            <label><input type="radio" name="is_member" value="1" required onclick="togglePhone(true)"> Ya</label>
+            <label class="ml-4"><input type="radio" name="is_member" value="0" onclick="togglePhone(false)"> Bukan</label>
         </div>
 
-        <div class="mb-4 " id="phone-container">
+        {{-- Nomor Telepon (tersembunyi default) --}}
+        <div class="mb-4 hidden" id="phone-container">
             <label for="number_telephone" class="block font-semibold">Nomor Telepon</label>
             <input type="text" name="number_telephone" id="number_telephone" class="border px-4 py-2 rounded w-full">
         </div>
@@ -58,5 +68,45 @@
         </button>
     </form>
 </div>
-
 @endsection
+
+@push('scripts')
+<script>
+    const display = document.getElementById('total_paid_display');
+    const hiddenInput = document.getElementById('total_paid');
+
+    display.addEventListener('input', function (e) {
+    let rawValue = e.target.value.replace(/[^0-9]/g, '');
+
+    // Maksimum 15 digit (Rp 999.999.999.999.999)
+    if (rawValue.length > 15) {
+        rawValue = rawValue.slice(0, 15); // Memotong agar panjang string maksimal 15 digit
+    }
+
+    // Konversi string angka ke number
+    let numericValue = parseInt(rawValue || '0');
+
+    // Tentukan batas maksimum (sesuai tipe data database, misalnya 15 digit)
+    const MAX_TOTAL_BAYAR = 999999999999999;
+
+    // Batasi jika melebihi maksimum
+    if (numericValue > MAX_TOTAL_BAYAR) {
+        numericValue = MAX_TOTAL_BAYAR;
+        rawValue = numericValue.toString();
+    }
+
+    // Format ke Rp
+    let formatted = new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0
+    }).format(numericValue);
+
+    // Set value ke input
+    display.value = formatted;
+    hiddenInput.value = rawValue;
+});
+
+</script>
+@endpush
+

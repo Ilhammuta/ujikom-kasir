@@ -14,15 +14,12 @@
             <p class="text-lg text-gray-600">Selamat Datang, Administrator!</p>
         </div>
 
-        <!-- Charts Section -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Chart 1 -->
             <div class="bg-white p-6 rounded-2xl shadow">
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Jumlah Penjualan per Hari</h3>
                 <div id="container" class="w-full h-80"></div>
             </div>
 
-            <!-- Chart 2 -->
             <div class="bg-white p-6 rounded-2xl shadow">
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Persentase Penjualan Produk</h3>
                 <div id="con" class="w-full h-80"></div>
@@ -30,7 +27,6 @@
         </div>
     </div>
 
-    {{-- Debug --}}
     <script>
         console.log("TANGGAL:", {!! json_encode($dates) !!});
         console.log("TOTAL:", {!! json_encode($totals) !!});

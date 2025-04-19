@@ -6,7 +6,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Exports\PenjualanExport;
-use App\Models\Penjualan;
 use Maatwebsite\Excel\Facades\Excel;
 
 Route::get('/', function () {
@@ -17,7 +16,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard/admin', [PenjualanController::class, 'dashboardAdmin'])->name('dashboard.admin');
     Route::get('/dashboard/employee', [PenjualanController::class, 'dashboard'])->name('dashboard.petugas');
 });
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -33,12 +31,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/sales/member', [PenjualanController::class, 'member'])->name('sales.member');
     Route::post('/sales/store', [PenjualanController::class, 'store'])->name('sales.store');
     Route::get('invoice/{id}/download', [PenjualanController::class, 'downloadInvoice'])->name('penjualan.pdf');
-    Route::get('/export-penjualan', function () {
-        return Excel::download(new PenjualanExport, 'penjualan.xlsx');
-    });
+    Route::get('/report', [PenjualanController::class, 'report'])->name('report.index');
+    Route::get('/laporan-penjualan/excel', function (\Illuminate\Http\Request $request) {
+        $filter = $request->input('filter', 'daily');
+        $month = $request->input('month', now()->month);
+        $year = $request->input('year', now()->year);
+
+        return Excel::download(new PenjualanExport($filter, $month, $year), 'laporan_penjualan.xlsx');
+    })->name('laporan.penjualan.excel');
+
     Route::get('/chart-data', [PenjualanController::class, 'chartData']);
 });
-
-
 
 require __DIR__ . '/auth.php';

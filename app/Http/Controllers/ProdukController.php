@@ -87,7 +87,7 @@ class ProdukController extends Controller
     public function updateStok(Request $request, $id)
     {
         $request->validate([
-            'stok' => 'required|integer|min:0'
+            'stok' => 'required|integer|min:0|max:1000000',
         ]);
 
         $produk = Produk::findOrFail($id);

@@ -16,11 +16,11 @@ return new class extends Migration
             $table->foreignId('dibuat_oleh')->constrained('users')->onDelete('cascade');
             $table->foreignId('member_id')->nullable()->constrained('members')->onDelete('set null');
             $table->string('status_member')->default('non_member'); // atau enum kalau mau lebih strict
-            $table->integer('poin_dipakai')->default(0);
-            $table->integer('poin_didapat')->default(0);
-            $table->integer('total_harga');
-            $table->integer('total_bayar');
-            $table->integer('kembalian');
+            $table->bigInteger('poin_dipakai')->default(0);
+            $table->bigInteger('poin_didapat')->default(0);
+            $table->bigInteger('total_harga');
+            $table->bigInteger('total_bayar');
+            $table->bigInteger('kembalian');
             $table->timestamps();
         });
     }

@@ -102,7 +102,7 @@
 
         <!-- Modals -->
         @foreach ($penjualans as $item)
-            <div id="modal-{{ $item->id }}" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+            <div id="modal-{{ $item->id }}" class="fixed inset-0 z-50 flex items-center justify-center hidden" data-time="{{ $item->created_at->format('Y-m-d H:i:s') }}">
                 <div class="fixed inset-0 bg-black bg-opacity-50" onclick="closeModal('modal-{{ $item->id }}')"></div>
 
                 <div class="bg-white w-full max-w-xl mx-4 p-6 rounded-md shadow-lg relative">
@@ -114,8 +114,7 @@
 
                     <div class="flex justify-between text-sm text-gray-700 mb-4">
                         <div>
-                            <p><strong>Member Status:</strong>
-                                {{ $item->status_member === 'member' ? 'Member' : 'NON-MEMBER' }}</p>
+                            <p><strong>Member Status:</strong> {{ $item->status_member === 'member' ? 'Member' : 'NON-MEMBER' }}</p>
                             <p><strong>No. HP:</strong> {{ $item->member->telp ?? '-' }}</p>
                             <p><strong>Poin Member:</strong> {{ $item->member->poin ?? '0' }}</p>
                         </div>
@@ -140,10 +139,8 @@
                                 <tr class="border-b">
                                     <td class="py-2">{{ $detail->produk->produk }}</td>
                                     <td class="py-2 text-center">{{ $detail->qty }}</td>
-                                    <td class="py-2 text-right">Rp.
-                                        {{ number_format($detail->produk->harga, 0, ',', '.') }}</td>
-                                    <td class="py-2 text-right">Rp.
-                                        {{ number_format($detail->produk->harga * $detail->qty, 0, ',', '.') }}</td>
+                                    <td class="py-2 text-right">Rp. {{ number_format($detail->produk->harga, 0, ',', '.') }}</td>
+                                    <td class="py-2 text-right">Rp. {{ number_format($detail->produk->harga * $detail->qty, 0, ',', '.') }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -154,8 +151,8 @@
                     </div>
 
                     <div class="text-xs text-gray-500 text-center mb-4">
-                        <p>Dibuat pada : {{ $item->created_at->format('Y-m-d H:i:s') }}</p>
-                        <p>Oleh : {{ $item->dibuat_oleh }}</p>
+                        <p class="real-time">Dibuat pada: {{ $item->created_at->format('Y-m-d H:i:s') }}</p>
+                        <p>Oleh: {{ $item->user->name ?? '-' }}</p>
                     </div>
 
                     <div class="text-right">
@@ -167,13 +164,14 @@
                 </div>
             </div>
         @endforeach
-
     </div>
 
     <!-- Scripts -->
     <script>
         function openModal(id) {
-            document.getElementById(id).classList.remove('hidden');
+            const modal = document.getElementById(id);
+            modal.classList.remove('hidden');
+            startRealTime(modal);
         }
 
         function closeModal(id) {
@@ -186,11 +184,12 @@
 
         const searchInput = document.getElementById('search');
         let debounceTimeout;
-        searchInput.addEventListener('input', function() {
+        searchInput.addEventListener('input', function () {
             clearTimeout(debounceTimeout);
             debounceTimeout = setTimeout(() => {
                 this.form.submit();
             }, 500);
         });
+      
     </script>
 @endsection

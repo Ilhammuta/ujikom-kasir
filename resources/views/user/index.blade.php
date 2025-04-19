@@ -7,6 +7,7 @@
         <nav class="text-sm text-gray-500 mb-4">
             <a href="#" class="hover:underline">Home</a> / <span>User</span>
         </nav>
+
         <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-3">
             <h1 class="text-3xl font-bold text-gray-800">User</h1>
             <a href="{{ route('user.create') }}"
@@ -15,9 +16,16 @@
             </a>
         </div>
 
+        {{-- Flash Message --}}
         @if (session('success'))
             <div class="mb-4 p-4 bg-green-100 text-green-800 rounded-lg border border-green-300">
                 {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="mb-4 p-4 bg-red-100 text-red-800 rounded-lg border border-red-300">
+                {{ session('error') }}
             </div>
         @endif
 
@@ -44,15 +52,23 @@
                                     class="bg-yellow-400 text-white px-4 py-1 rounded hover:bg-yellow-500 transition text-sm">
                                     Edit
                                 </a>
-                                <form action="{{ route('user.destroy', $item->id) }}" method="POST" class="inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600 transition text-sm"
-                                        onclick="return confirm('Yakin ingin menghapus?')">
+
+                                {{-- @if ($item->role === 'admin')
+                                    <button class="bg-red-500 text-white px-4 py-1 rounded cursor-not-allowed opacity-50" disabled>
                                         Hapus
                                     </button>
-                                </form>
+                                @else --}}
+                                    <button type="button"
+                                        onclick="confirmDelete({{ $item->id }})"
+                                        class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600 transition text-sm">
+                                        Hapus
+                                    </button>
+
+                                    <form id="delete-form-{{ $item->id }}" action="{{ route('user.destroy', $item->id) }}" method="POST" style="display: none;">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                {{-- @endif --}}
                             </td>
                         </tr>
                     @endforeach
@@ -61,3 +77,27 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    {{-- SweetAlert CDN --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'Yakin ingin menghapus akun ini?',
+                text: "Tindakan ini tidak dapat dibatalkan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById(`delete-form-${id}`).submit();
+                }
+            });
+        }
+    </script>
+@endpush

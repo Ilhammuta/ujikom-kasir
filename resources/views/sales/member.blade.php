@@ -16,14 +16,12 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="block font-semibold mb-1">Nama Member</label>
-                    <input type="text" name="nama" value="{{ $member->nama }}" readonly
-                        class="border px-4 py-2 rounded w-full bg-gray-100">
+                    <input type="text" name="nama" value="{{ $member->nama }}" readonly class="border px-4 py-2 rounded w-full bg-gray-100">
                 </div>
 
                 <div>
                     <label class="block font-semibold mb-1">Nomor Telepon</label>
-                    <input type="text" name="telp" value="{{ $member->telp }}" readonly
-                        class="border px-4 py-2 rounded w-full bg-gray-100">
+                    <input type="text" name="telp" value="{{ $member->telp }}" readonly class="border px-4 py-2 rounded w-full bg-gray-100">
                 </div>
             </div>
 
@@ -47,6 +45,7 @@
                             </div>
                         </div>
                     @endforeach
+
                     <div class="flex justify-between pt-3 text-lg font-bold">
                         <span>Total Harga</span>
                         <span>Rp {{ number_format($totalPrice, 0, ',', '.') }}</span>
@@ -78,13 +77,21 @@
         @endforeach
 
         {{-- Gunakan Point --}}
-        <div>
-            <label class="block font-semibold mb-2">Gunakan Point?</label>
-            <label class="inline-flex items-center">
-                <input type="checkbox" name="poin_dipakai" class="mr-2">
-                Gunakan {{ $point ?? 0 }} point
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">
+                Gunakan Poin
             </label>
+        
+            <div class="flex items-center space-x-2 mt-1">
+                <input type="checkbox" name="poin_dipakai" id="gunakan_poin" value="1"
+                    class="rounded border-gray-300 text-blue-600 shadow-sm focus:ring-blue-500">
+                <label for="poin_dipakai" class="text-sm text-gray-700">Gunakan seluruh poin (maks {{ min($point ?? 0, $totalPrice) }})</label>
+            </div>
+        
+            <p class="text-sm text-green-600 mt-1">+{{ $reward ?? 0 }} poin akan didapat dari transaksi ini</p>
         </div>
+        
+        
 
         {{-- Submit Button --}}
         <div class="text-end">
