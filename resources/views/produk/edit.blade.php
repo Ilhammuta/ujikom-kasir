@@ -15,7 +15,6 @@
 
             <div class="bg-white p-6 rounded shadow-md">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- Nama Produk -->
                     <div>
                         <label class="block text-gray-700 font-semibold mb-1">Nama Produk <span class="text-red-500">*</span></label>
                         <input type="text" name="produk" class="w-full p-2 border rounded" value="{{ old('produk', $produk->produk) }}" required>
@@ -24,7 +23,6 @@
                         @enderror
                     </div>
 
-                    <!-- Upload Gambar -->
                     <div>
                         <label class="block text-gray-700 font-semibold mb-1">Gambar Produk</label>
                         <input type="file" name="image" class="w-full p-2 border rounded" accept="image/*">
@@ -40,7 +38,6 @@
                         @endif
                     </div>
 
-                    <!-- Harga -->
                     <div>
                         <label class="block text-gray-700 font-semibold mb-1">Harga <span class="text-red-500">*</span></label>
                         <input type="text" name="harga_display" id="harga" class="w-full p-2 border rounded"
@@ -51,7 +48,6 @@
                         @enderror
                     </div>
 
-                    <!-- Stok -->
                     <div>
                         <label class="block text-gray-700 font-semibold mb-1">Stok <span class="text-red-500">*</span></label>
                         <input type="number" name="stok" class="w-full p-2 border rounded" value="{{ old('stok', $produk->stok) }}" readonly required>

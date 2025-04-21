@@ -4,12 +4,10 @@
 
 @section('content')
     <div class="container mx-auto px-6 py-6">
-        <!-- Breadcrumb -->
         <nav class="text-sm text-gray-500 mb-4">
             <a href="#" class="hover:underline">Home</a> / <span>Penjualan</span>
         </nav>
 
-        <!-- Header & Add Button -->
         <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-3">
             <h1 class="text-3xl font-bold text-gray-800">Data Penjualan</h1>
             @auth
@@ -22,7 +20,6 @@
             @endauth
         </div>
 
-        <!-- Export Button -->
         <div class="mb-4">
             <a href="{{ Auth::user()->role === 'employee' ? url('/export-penjualan') : '#' }}"
                 onclick="{{ Auth::user()->role === 'admin' ? 'showExportAlert(); return false;' : '' }}"
@@ -31,7 +28,6 @@
             </a>
         </div>
 
-        <!-- Filter & Search -->
         <form method="GET" action="{{ route('penjualan.index') }}"
             class="mb-4 flex flex-col sm:flex-row sm:justify-between gap-3">
             <div class="flex items-center gap-2">
@@ -58,7 +54,6 @@
             </div>
         @endif
 
-        <!-- Tabel Penjualan -->
         <div class="bg-white shadow-md rounded-lg overflow-x-auto">
             <table class="w-full text-left border-collapse">
                 <thead class="bg-gray-200 text-sm text-gray-700">
@@ -94,13 +89,11 @@
                 </tbody>
             </table>
 
-            <!-- Pagination -->
             <div class="px-6 py-4">
                 {{ $penjualans->links() }}
             </div>
         </div>
 
-        <!-- Modals -->
         @foreach ($penjualans as $item)
             <div id="modal-{{ $item->id }}" class="fixed inset-0 z-50 flex items-center justify-center hidden" data-time="{{ $item->created_at->format('Y-m-d H:i:s') }}">
                 <div class="fixed inset-0 bg-black bg-opacity-50" onclick="closeModal('modal-{{ $item->id }}')"></div>
@@ -166,7 +159,6 @@
         @endforeach
     </div>
 
-    <!-- Scripts -->
     <script>
         function openModal(id) {
             const modal = document.getElementById(id);

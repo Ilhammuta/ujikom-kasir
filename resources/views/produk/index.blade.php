@@ -4,12 +4,10 @@
 
 @section('content')
     <div class="container mx-auto px-6 py-10">
-        <!-- Breadcrumb -->
         <nav class="text-sm text-gray-500 mb-4">
             <a href="#" class="hover:underline">Home</a> / <span class="text-gray-700 font-medium">Produk</span>
         </nav>
 
-        <!-- Header -->
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-4xl font-bold text-gray-800">Produk</h1>
             @auth
@@ -21,7 +19,6 @@
             @endauth
         </div>
 
-        <!-- Flash message -->
         @if (session('success'))
             <div class="mb-6 p-4 bg-green-100 text-green-800 rounded-lg border border-green-300 shadow">
                 {{ session('success') }}
@@ -34,7 +31,6 @@
             </div>
         @endif
 
-        <!-- Produk Table -->
         <div class="bg-white shadow-lg rounded-xl overflow-x-auto">
             <table class="w-full text-sm text-left border-collapse">
                 <thead class="bg-gray-100">
@@ -96,7 +92,6 @@
         </div>
     </div>
 
-    <!-- Modal Update Stok -->
     <div id="modalUpdateStok"
         class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 hidden z-50 transition">
         <div id="modalContent"
@@ -126,7 +121,6 @@
         </div>
     </div>
 
-    <!-- Script Modal -->
     <script>
         function openModal(id, nama, stok) {
             document.getElementById("produkNama").value = nama;

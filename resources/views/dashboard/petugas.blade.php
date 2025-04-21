@@ -12,19 +12,15 @@
     @endif
 
     <div class="container mx-auto px-6 py-10">
-        <!-- Breadcrumb -->
         <nav class="text-sm text-gray-500 mb-4">
             <a href="#" class="hover:underline">Home</a> / <span class="text-gray-700 font-medium">Penjualan</span>
         </nav>
 
-        <!-- Heading -->
         <h1 class="text-4xl font-bold text-gray-800 mb-8">Dashboard</h1>
 
-        <!-- Card -->
         <div class="bg-white shadow-lg rounded-2xl p-8">
             <h2 class="text-2xl font-semibold text-gray-800 mb-6">Selamat Datang, Petugas!</h2>
 
-            <!-- Filter Form -->
             <form method="GET" action="{{ route('report.index') }}" class="mb-6 flex items-center gap-2">
                 <label class="text-sm text-gray-700 font-medium">
                     Filter laporan:
@@ -39,8 +35,6 @@
                 </button>
             </form>
             
-
-            <!-- Sales Info -->
             <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 text-center shadow-inner">
                 <div class="text-gray-600 text-sm font-medium mb-2">Total Penjualan 
                     @if(request('filter') == 'monthly')

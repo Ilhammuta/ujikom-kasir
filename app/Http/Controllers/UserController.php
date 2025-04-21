@@ -58,7 +58,7 @@ class UserController extends Controller
         $user->role = $request->role;
 
         if ($request->filled('password')) {
-            $user->password = Hash::make($request->password); // hash kalau diisi
+            $user->password = Hash::make($request->password);
         }
 
         $user->save();

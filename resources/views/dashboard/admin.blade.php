@@ -8,7 +8,6 @@
             <a href="#" class="hover:underline">Home</a> / <span>Penjualan</span>
         </nav>
 
-        <!-- Heading -->
         <div>
             <h2 class="text-3xl font-bold text-gray-900">Dashboard</h2>
             <p class="text-lg text-gray-600">Selamat Datang, Administrator!</p>
@@ -33,13 +32,11 @@
         console.log("PRODUK:", {!! json_encode($productSales) !!});
     </script>
 
-    {{-- Highcharts Scripts --}}
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-    {{-- Chart Column --}}
     <script>
         Highcharts.chart('container', {
             chart: {
@@ -49,7 +46,7 @@
                 text: ''
             },
             exporting: {
-                enabled: false // <--- di sini
+                enabled: false
             },  
             xAxis: {
                 categories: {!! json_encode($dates) !!},
@@ -71,7 +68,6 @@
         });
     </script>
 
-    {{-- Chart Pie --}}
     <script>
         Highcharts.chart('con', {
             chart: {
@@ -81,7 +77,7 @@
                 text: ''
             },
             exporting: {
-                enabled: false // <--- di sini
+                enabled: false
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

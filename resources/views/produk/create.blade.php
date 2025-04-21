@@ -13,7 +13,6 @@
             @csrf
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- Nama Produk -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Nama Produk <span class="text-red-500">*</span></label>
                         <input type="text" name="produk" class="w-full p-2 border rounded" required value="{{ old('produk') }}">
@@ -22,7 +21,6 @@
                         @enderror
                     </div>
 
-                    <!-- Gambar -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Gambar Produk <span class="text-red-500">*</span></label>
                         <input type="file" name="image" class="w-full p-2 border rounded" accept="image/*" required>
@@ -31,7 +29,6 @@
                         @enderror
                     </div>
 
-                    <!-- Harga -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Harga <span class="text-red-500">*</span></label>
                         <input type="text" name="harga_display" id="harga" class="w-full p-2 border rounded" required  >
@@ -41,7 +38,6 @@
                         @enderror
                     </div>
 
-                    <!-- Stok -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Stok <span class="text-red-500">*</span></label>
                         <input type="number" name="stok" class="w-full p-2 border rounded" required value="{{ old('stok') }}">
@@ -51,7 +47,6 @@
                     </div>
                 </div>
 
-                <!-- Tombol Simpan -->
                 <div class="mt-6 text-right">
                     <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-md shadow hover:bg-blue-700 transition">
                         Simpan

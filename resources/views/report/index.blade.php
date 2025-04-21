@@ -19,11 +19,8 @@
              Unduh Laporan Excel
             </a>
 
-
-            <!-- Form Filter -->
             <form action="{{ route('report.index') }}" method="GET" class="mb-6">
                 <div class="flex space-x-4">
-                    <!-- Filter berdasarkan pilihan -->
                     <div>
                         <label for="filter" class="block text-sm font-semibold">Pilih Filter</label>
                         <select name="filter" id="filter" class="bg-gray-100 border p-2 rounded-md" onchange="toggleFilters()">

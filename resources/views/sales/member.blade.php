@@ -12,7 +12,6 @@
         @if (isset($member))
             <input type="hidden" name="member_id" value="{{ $member->id }}">
 
-            {{-- Informasi Member --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="block font-semibold mb-1">Nama Member</label>
@@ -25,7 +24,6 @@
                 </div>
             </div>
 
-            {{-- Detail Produk --}}
             <div>
                 <h2 class="text-lg font-semibold mb-3">Detail Produk yang Dibeli</h2>
                 <div class="border rounded p-4 space-y-3 bg-white shadow">
@@ -53,7 +51,6 @@
                 </div>
             </div>
         @else
-            {{-- Form Tambah Member Baru --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="block font-semibold mb-1">Nama Member</label>
@@ -66,7 +63,6 @@
             </div>
         @endif
 
-        {{-- Input Hidden Data --}}
         <input type="hidden" name="total_harga" value="{{ $totalPrice }}">
         <input type="hidden" name="total_bayar" value="{{ $totalPaid }}">
 
@@ -76,7 +72,6 @@
             <input type="hidden" name="orders[{{ $index }}][subtotal]" value="{{ $order['subtotal'] }}">
         @endforeach
 
-        {{-- Gunakan Point --}}
         <div class="mb-4">
             <label class="block text-sm font-medium text-gray-700">
                 Gunakan Poin
@@ -91,9 +86,6 @@
             <p class="text-sm text-green-600 mt-1">+{{ $reward ?? 0 }} poin akan didapat dari transaksi ini</p>
         </div>
         
-        
-
-        {{-- Submit Button --}}
         <div class="text-end">
             <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded shadow">
                 Selesaikan Pembelian

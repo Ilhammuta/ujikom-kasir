@@ -240,14 +240,13 @@ class PenjualanController extends Controller
                 $pointUsed = min($availablePoints, $totalPrice);
             }
     
-            // Kurangi total harga dengan poin yang digunakan
             $finalTotal = $totalPrice - $pointUsed;
             $changeAmount = $totalPaid - $finalTotal;
     
             return $this->store(
                 $orders,
                 $totalPaid,
-                $finalTotal,    // ⬅️ sudah dipotong poin
+                $finalTotal,
                 $changeAmount,
                 $memberId,
                 $pointUsed,
@@ -276,15 +275,8 @@ class PenjualanController extends Controller
         }
     }
     
-
-    
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store($orders, $totalPaid, $totalPrice, $changeAmount, $memberId = null, $pointUsed = 0, $pointReward = 0)
     {
-        // Simpan ke tabel penjualans
         $penjualan = Penjualan::create([
             'dibuat_oleh'    => Auth::id(),
             'member_id'      => $memberId,
@@ -300,18 +292,15 @@ class PenjualanController extends Controller
         if ($memberId) {
             $member = Member::find($memberId);
             
-            // Jika poin digunakan, kurangi poin member
             if ($pointUsed > 0) {
                 $member->poin -= $pointUsed;
             }
     
-            // Menambah poin reward yang didapat dari transaksi
             $member->poin += $pointReward;
     
             $member->save();
         }
 
-        // Simpan detail ke tabel detail_penjualans
         foreach ($orders as $orderItem) {
             $produk = Produk::find($orderItem['product_id']);
 
@@ -329,7 +318,6 @@ class PenjualanController extends Controller
             }
         }
 
-        // Eager load dan tampilkan struk
         $penjualan->load(['member', 'detailPenjualans.produk']);
         return view('sales.receipt', compact('penjualan'));
     }

@@ -53,11 +53,11 @@
                                     Edit
                                 </a>
 
-                                {{-- @if ($item->role === 'admin')
+                                @if ($item->role === 'admin')
                                     <button class="bg-red-500 text-white px-4 py-1 rounded cursor-not-allowed opacity-50" disabled>
                                         Hapus
                                     </button>
-                                @else --}}
+                                @else
                                     <button type="button"
                                         onclick="confirmDelete({{ $item->id }})"
                                         class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600 transition text-sm">
@@ -68,7 +68,7 @@
                                         @csrf
                                         @method('DELETE')
                                     </form>
-                                {{-- @endif --}}
+                                @endif
                             </td>
                         </tr>
                     @endforeach
